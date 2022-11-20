@@ -10,6 +10,8 @@ function punto1() {
     array[2] = 7;
     array[3] = 6;
     array[4] = 5;
+
+    array.forEach(element => (element=="") ? array.push(1) : array.push(2));
     console.log(`--- Punto 1 ---\nArreglo de tamaño ${array.length} de numeros: ${array}`)
 
     console.log(array)
@@ -163,7 +165,6 @@ function punto9() {
     let nombre = "", edad = 0;
 
     while (true) {
-
         nombre = prompt("Escriba su nombre: ");
         if (nombre == '*') {
             break;
@@ -172,7 +173,6 @@ function punto9() {
 
         let alumno = new Alumno(nombre, edad)
         alumnos.push(alumno);
-
     }
 
     let mayores = alumnos.filter(element => element.edad >= 18);
@@ -205,7 +205,7 @@ function punto10() {
         matriz[i] = new Array(5);
     }
 
-    //LLENAR MATRIZ CON NUMEROS ALEATORIOS
+    //LLENAR MATRIZ CON NUMEROS ALEATORIOS DEL 0-20
     for (let i = 0; i < matriz.length; i++) {
         for (let j = 0; j < matriz.length; j++) {
             matriz[i][j] = Math.floor(Math.random() * 20);
@@ -229,17 +229,18 @@ function punto10() {
         
     }
 
-    let mat = "", cols = 0;;
+    let mat = "", cols = "";;
     for (let i=0;i<matriz.length;i++) {
         for (let j=0;j<matriz.length;j++) {
-            mat += " * "+matriz[i][j] + "\t";
-            cols = sumarCols(j);
+            mat += matriz[i][j] + "\t";
         }
-        mat += " = " + sumarFilas(i);
-        mat += "\n"
+        cols += sumarCols(i) + "\t";
+        mat += "= " + sumarFilas(i);
+        mat += "\n";
     }
+    mat += "----------------------------------- \n"
+    mat += cols;
     console.log(mat);
-    console.log()
 
 }
 

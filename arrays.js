@@ -3,18 +3,21 @@
  * manualmente (los que tu quieras) y mostrarlos por pantalla.
  */
 function punto1() {
-    let array = Array(5);
+    const prompt = require("prompt-sync")({ sigint: true });
 
-    array[0] = 9;
-    array[1] = 8;
-    array[2] = 7;
-    array[3] = 6;
-    array[4] = 5;
-
-    array.forEach(element => (element=="") ? array.push(1) : array.push(2));
-    console.log(`--- Punto 1 ---\nArreglo de tamaño ${array.length} de numeros: ${array}`)
-
-    console.log(array)
+    let aux=1, dato=0;
+    let retorno=[];
+    while(aux<=5){
+        dato = Number(prompt("Digite un valor númerico: "));
+        if(isNaN(dato)==true){
+            console.log("Valor no númerico")
+        }
+        else{
+            retorno.push(dato);
+        }
+        aux++;
+    }
+    console.log(retorno)
 }
 
 /**
@@ -25,8 +28,7 @@ function punto2() {
     let array = Array.from({ length: 10 }, (_v, num) => num * 2)
     console.log(`--- Punto 2 ---\nArreglo de numeros: ${array}`)
 
-    let suma = array.reduce((acu, sig) => sig += acu, 0);
-    var promedio = suma / array.length;
+    let promedio = array.reduce((acu, sig) => sig += acu, 0)/array.length;
 
     console.log(`El promedio del arreglo es: ${promedio}`);
 
@@ -42,7 +44,6 @@ function punto3(array) {
     console.log(`--- Punto 3 ---\nArreglo: ${array}`)
 
     let elemento = parseInt(prompt("Digite el elemento a buscar: "));
-
 
     let desde = 0 , rta = "", busq;
     while (busq != -1) {
@@ -89,8 +90,7 @@ function punto5(vector) {
     let maximos = vector.filter(element => element == Math.max(...vector));
     let minimos = vector.filter(element => element == Math.min(...vector));
 
-    let suma = vector.reduce((acu, sig) => sig += acu, 0);
-    let promedio = suma / vector.length;
+    let promedio = vector.reduce((acu, sig) => sig += acu, 0) / vector.length;
 
     console.log(`El(los) mayores del vector son: ${maximos}`)
     console.log(`El(los) menores del vector son: ${minimos}`)
@@ -164,16 +164,14 @@ function punto9() {
     let alumnos = [];
     let nombre = "", edad = 0;
 
-    while (true) {
+    do {
         nombre = prompt("Escriba su nombre: ");
-        if (nombre == '*') {
-            break;
+        if (nombre != '*') {
+            edad = prompt("Escriba su edad: ");
+            let alumno = new Alumno(nombre, edad)
+            alumnos.push(alumno);
         }
-        edad = prompt("Escriba su edad: ");
-
-        let alumno = new Alumno(nombre, edad)
-        alumnos.push(alumno);
-    }
+    } while (nombre != "*");
 
     let mayores = alumnos.filter(element => element.edad >= 18);
     console.log(`Alumnos mayores de edad: ${mayores.map(function (alumno) {
@@ -278,7 +276,7 @@ punto1();
 punto2();
 
 let arreglo = [1, 20, 15, 0, 6, 7, 5, 8, 11, 12, 17, 16, 0, 14];
-//punto3(arreglo);
+punto3(arreglo);
 
 let notas = [1, 20, 15, 0, 6, 7, 5, 8, 11, 12, 17, 16, 0, 14];
 punto4(notas)
@@ -292,7 +290,6 @@ console.log(`Arreglo multiplicado: ${punto7(numeros)}`)
 
 tam = 7;
 punto8(tam);
-//punto9();
-
+punto9();
 punto10();
-//punto11();
+punto11();
